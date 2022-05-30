@@ -1,0 +1,66 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Sign Up {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/setting.css' %}">
+{% endblock css %}
+{% block content %}
+
+
+    <section class="page-header page-header-xs settings-background"
+        style="background-image: url({% static 'img/soroush-karimi.jpg' %});height: auto; min-height: 100vh !important;">
+        <div class="filter">
+            <div class="container">
+                <div class="register_card_main_div">
+                    <div class="reg_title_div pt-3">
+                        
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{msg}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <h4>Register</h4>
+                    </div>
+                    <form action="/signup/" id="validatedForm" class="register_input_feids_div pt-3" method="post"> {% csrf_token %}
+                        <div class="reg_input_div">
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="reg_input_div">
+                            <input type="password" oninput="checkpass()" class="form-control" name="password" id="password" placeholder="Password">
+                        </div>
+                        <div class="reg_input_div">
+                            <input type="password" class="form-control" oninput="checkpass()" id="cpassword" placeholder="Confirm Password">
+                        </div>
+                        <div class="reg_btn_div">
+                            <button type="submit" id="btn" disabled>Register</button>
+                        </div>
+                        <div class="reg_last_text">
+                            <p>Already have an account?<a href="/signin/"> Sign In.</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+{% block js %}
+<script src="{% static 'js/script.js' %}"></script>
+<script>
+    function checkpass(){
+        var pass = $('#password').val();
+        var cpass = $('#cpassword').val();
+        if(pass != cpass){
+            $('#cpassword').css('border-color','red');
+            $('#password').css('border-color','red');
+            $('#btn').attr('disabled',true);
+        }else{
+            $('#cpassword').css('border-color','green');
+            $('#password').css('border-color','green');
+            $('#btn').attr('disabled',false);
+        }
+    }
+</script>
+{% endblock js %}

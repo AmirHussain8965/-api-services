@@ -1,0 +1,87 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Pricing {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/setting.css' %}">
+<link rel="stylesheet" href="{% static 'css/paper-kit.css' %}">
+{% endblock css %}
+{% block content %}
+    <div class="page-header page-header-xs settings-background" style="background-image: url({% static 'img/navbg.jpg' %});>
+        <div class="filter">
+            <div class="container">
+                <div class="form-group setting_textcopy">
+                    <input type="text" class="form-control border-input" value="{{api.key}}" disabled placeholder="Copy Text" id="myInput">
+                    <i class="bi bi-clipboard" id="toggle" data-toggle="tooltip" data-placement="top"
+                        title="Copy to Clipboard" onclick="myFunction()"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="setting_input_section">
+        <div class="container">
+
+            <div class="row setting_three_boxes_main_div">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="setting_box1_div">
+                        <h2>{{api.payment.sub_calls}}</h2>
+                        <h5>Api Calls Left</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="setting_box2_div">
+                        <h2>{{api.payment.sub_name}}</h2>
+                        <h5>Subscription name</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="setting_box3_div">
+                        <h2>{{api.payment.sub_date|date:"d M y"}}</h2>
+                        <h5>Subsciption Purchased On</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="setting_box4_div">
+                        <h2>{{days_left}} Days</h2>
+                        <h5>Subsciption Expired In</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                    <form class="settings-form">
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control border-input" placeholder="First Name"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Last Email</label>
+                                    <input type="email" class="form-control border-input" placeholder="Eamil"
+                                        required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" class="form-control border-input" placeholder="Job Title" required />
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="setting_btn">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+{% block js %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock js %}

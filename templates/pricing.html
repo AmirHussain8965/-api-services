@@ -1,0 +1,122 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Pricing {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/setting.css' %}">
+<link rel="stylesheet" href="{% static 'css/demo.css' %}">
+<link rel="stylesheet" href="{% static 'css/paper-kit.css' %}">
+<style>
+    body {
+        background-color: #151f20 !important;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+    <div class="pricing-4 section section-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto text-center">
+                    <h2 class="title">Pick the best plan for you</h2>
+                    <h5 class="description">You have Free Unlimited Updates and Premium Support on each package.</h5>
+                </div>
+            </div>
+            <div class="space-top"></div>
+            <div class="row mt-5">
+                <div class="col-md-3">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-success">Startup</h6>
+                            <h1 class="card-title">$100</h1>
+                            <ul class="text-white">
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Sharing Tools</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Design Tools</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Private Messages</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Personal Brand</li>
+                            </ul>
+                            <button class="btn btn-outline-neutral cardbtn btn-round" onclick="payment(100)">Upgrade plan</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-pricing">
+                        <div class="card-body">
+                            <h6 class="card-category text-success">Small company</h6>
+                            <h1 class="card-title" style="color: #000 !important;">$200</h1>
+                            <ul>
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Sharing Tools</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Design Tools</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Private Messages</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Personal Brand</li>
+                            </ul>
+                            <button class="btn btn-outline-success p2card cardbtn btn-round" onclick="payment(200)">Upgrade
+                                plan</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-success">Large Company</h6>
+                            <h1 class="card-title">$300</h1>
+                            <ul class="text-white">
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Sharing Tools</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Design Tools</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Private Messages</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Personal Brand</li>
+                            </ul>
+                            <button class="btn btn-outline-neutral cardbtn btn-round" onclick="payment(300)">Upgrade plan</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-pricing card-plain">
+                        <div class="card-body">
+                            <h6 class="card-category text-success">Enterprise</h6>
+                            <h1 class="card-title">$400</h1>
+                            <ul class="text-white">
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Sharing Tools</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Design Tools</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Private Messages</li>
+                                <li><i class="fa fa-times" aria-hidden="true"></i> Personal Brand</li>
+                            </ul>
+                            <button class="btn btn-outline-neutral cardbtn btn-round" onclick="payment(400)">Upgrade plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block js %}
+<script src="{% static 'js/script.js' %}"></script>
+
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+  var stripe = Stripe('{{ stripe }}');
+
+  function payment(price) {
+      fetch(`/payment/${price}/`, {
+          method: 'POST',
+          body: ''
+      })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.sessionId });
+        })
+        .then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+        });
+  };
+</script>
+
+{% endblock js %}

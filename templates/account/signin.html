@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Sign In {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/setting.css' %}">
+
+{% endblock css %}
+{% block content %}
+
+
+    <section class="page-header page-header-xs settings-background"
+        style="background-image: url({% static 'img/soroush-karimi.jpg' %});height: auto; min-height: 100vh !important;">
+        <div class="filter">
+            <div class="container">
+                <div class="register_card_main_div">
+                    <div class="reg_title_div pt-3">
+                        
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{msg}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+
+                        <h4>Sign In</h4>
+                    </div>
+                    <form action="{{app_path}}" class="register_input_feids_div pt-3" method="post"> {% csrf_token %}
+                        <div class="reg_input_div">
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="reg_input_div">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="forget text-end mt-2" style="text-align: end;">
+                            <a href="/forget/">Forget Password?</a>
+                        </div>
+                        <div class="reg_btn_div">
+                            <button type="submit">Login</button>
+                        </div>
+                        <div class="reg_last_text">
+                            <p>Don't have an account?<a href="/signup/"> Register.</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock content %}
+    {% block js %}
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock js %}

@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Payment Success {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/setting.css' %}">
+<style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    body {
+        background-image: linear-gradient(to right, #a071f6, #70f0fb) !important;
+        font-family: 'Poppins', sans-serif;
+    }
+    .sec13{
+        
+        background-image: linear-gradient(to right, #a071f6, #70f0fb) !important;
+    }
+    .payment_card_body{
+        background-color: #fff;
+        height: auto;
+        min-height: 350px;
+        width: 100%;
+        max-width: 350px;
+        margin: auto;
+        padding: 15px;
+        box-shadow: 0 0 10px #849192;
+        border-radius: 8px;
+    }
+    .payment_card_body img{
+        width: 100%;
+        max-width: 130px;
+        height: auto;
+        
+    }
+    .payment_card_body h5{
+        padding-top: 35px;
+        color: #000;
+        font-weight: 600;
+    }
+    .payment_card_body p{
+        color: #000;
+    }
+    .payment_card_body button{
+        margin-top: 15px;
+        background-color: #f5593d;
+        border: none;
+        padding: 8px 5px;
+        width: 120px;
+        outline: none;
+        color: #fff;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+    <div class="sec13 pricing-4 section section-dark">
+        <div class="container">
+            <div class="payment_card_body text-center">
+                <img src="{% static 'img/pay.png' %}" alt="">
+                <h5>Payment Success</h5>
+                <p>Your payment has been successfull detail has been sent to your email.</p>
+                <a href="/generateapi/">
+                    <button type="submit">Generate Api</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block js %}
+<script src="{% static 'js/script.js' %}"></script>
+
+
+{% endblock js %}
